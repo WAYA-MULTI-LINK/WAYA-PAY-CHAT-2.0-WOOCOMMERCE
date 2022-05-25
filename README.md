@@ -31,7 +31,7 @@ With this WayaPay Payment Gateway plugin, you will be able to accept the followi
 
 Implementing this plugin accepts payments into Nigerian Naira (NGN) accounts only.
 
-= Plugin Features =
+## Plugin Features 
 
 *   __Accept payment__ via Mastercard, Visa, Verve, USSD, Wallet & PayAttitude.
 *   __Seamless integration__ into the WooCommerce checkout page. Accept payment directly on your site
