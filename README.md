@@ -73,7 +73,7 @@ To configure the plugin, go to __WooCommerce > Settings__�from the left hand m
 
 # Frequently Asked Questions 
 
-= What Do I Need To Use The Plugin =
+## What Do I Need To Use The Plugin 
 
 1.	You need to have Woocommerce plugin installed and activated on your WordPress site.
 2.	You need to register an account [here](https://www.wayapay.ng/)
