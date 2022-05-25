@@ -1,21 +1,13 @@
 # WAYA-PAY-CHAT-2.0-WOOCOMMERCE
 
-=== WayaPay Payment Gateway ===
-Contributors: WayaPay
-Tags: wayapay, woocommerce, payment gateway, wayaPay plugins, verve cards, mastercard, visa
-Requires at least: 5.0.0
-Tested up to: 6.3
-Stable tag: 1.0.0
-Requires PHP: 5.6
-License: GPL-2.0+
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
 
 
 
 WayaPay Payment Gateway allows you to accept online payments on your Woocommerce store via Visa Cards, Mastercards, Verve Cards, PayAttitude, Wallet, and USSD.
 
 
-== Description ==
+# Description
 
 This is a WayaPay payment gateway for WooCommerce.
 
@@ -31,11 +23,11 @@ With this WayaPay Payment Gateway plugin, you will be able to accept the followi
 * __Visa__
 * __Verve__
 * __USSD__
-* __Waller__
+* __Wallet__
 * __PayAttitude__
 
 
-= Note =
+# Note 
 
 Implementing this plugin accepts payments into Nigerian Naira (NGN) accounts only.
 
@@ -45,9 +37,9 @@ Implementing this plugin accepts payments into Nigerian Naira (NGN) accounts onl
 *   __Seamless integration__ into the WooCommerce checkout page. Accept payment directly on your site
 
 
-== Installation ==
+# Installation 
 
-= Automatic Installation =
+## Automatic Installation 
 * 	Login to your WordPress Admin area
 * 	Go to "Plugins > Add New" from the left hand menu
 * 	In the search box type __WayaPay Payment Gateway__
@@ -58,7 +50,7 @@ Implementing this plugin accepts payments into Nigerian Naira (NGN) accounts onl
 * 	Click on the __WayaPay__ link from the available Checkout Options
 *	Configure your __WayaPay Payment Gateway__ settings. See below for details.
 
-= Manual Installation =
+## Manual Installation 
 1. 	Download the plugin zip file
 2. 	Login to your WordPress Admin. Click on "Plugins > Add New" from the left hand menu.
 3.  Click on the "Upload" option, then click "Choose File" to select the zip file from your computer. Once selected, press "OK" and press the "Install Now" button.
@@ -67,7 +59,7 @@ Implementing this plugin accepts payments into Nigerian Naira (NGN) accounts onl
 6. 	Click on the __WayaPay__ link from the available Checkout Options
 7.	Configure your __WayaPay Payment Gateway__ settings. See below for details.
 
-= Configure the plugin =
+## Configure the plugin 
 To configure the plugin, go to __WooCommerce > Settings__�from the left hand menu, then click "Payment Gateways" from the top tab. You should see  __WayaPay__ as part of the available Checkout Options. Click on it to configure the payment gateway.
 
 * __Enable/Disable__ - check the box to enable WayaPay Payment Gateway.
@@ -79,7 +71,7 @@ To configure the plugin, go to __WooCommerce > Settings__�from the left hand m
 * Click on __Save Changes__ for the changes you made to be effected.
 
 
-== Frequently Asked Questions ==
+# Frequently Asked Questions 
 
 = What Do I Need To Use The Plugin =
 
@@ -87,7 +79,7 @@ To configure the plugin, go to __WooCommerce > Settings__�from the left hand m
 2.	You need to register an account [here](https://www.wayapay.ng/)
 
 
-== Changelog ==
+# Changelog 
 
-= 1.0.0 =
+## 1.0.0 
 *   First release
