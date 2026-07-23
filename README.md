@@ -13,7 +13,7 @@ This is a WayaPay payment gateway for WooCommerce.
 
 WayaPay is on a mission to deliver a secure and seemless payment experience for customers and merchants. 
 
-To signup visit our website by clicking [here](https://www.wayapay.ng/)
+To signup visit our website by clicking [here](https://www.wayaquick.ng/)
 
 WayaPay Payment Gateway allows you to accept payment on your WooCommerce store using Mastercard, Visa, Verve, USSD, Wallet, PayAttitude.
 
