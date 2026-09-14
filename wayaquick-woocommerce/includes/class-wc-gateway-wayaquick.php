@@ -107,6 +107,12 @@ class WC_Gateway_WayaQuick extends WC_Payment_Gateway
                 'description' => __('Your MER_... Merchant ID from the dashboard.', 'wayaquick'),
                 'desc_tip' => true,
             ),
+            'public_key' => array(
+                'title' => __('Public Key', 'wayaquick'),
+                'type' => 'text',
+                'description' => __('Your WayaQuick merchant public key.', 'wayaquick'),
+                'desc_tip' => true,
+            ),
             'secret_key' => array(
                 'title' => __('Secret Key', 'wayaquick'),
                 'type' => 'password',
@@ -210,7 +216,39 @@ class WC_Gateway_WayaQuick extends WC_Payment_Gateway
             return array('result' => 'failure');
         }
 
-        $checkout_url = isset($data['checkOutUrl']) ? $data['checkOutUrl'] : '';
+        $checkout_url = isset($data['checkOutUrl'])
+    ? $data['checkOutUrl']
+    : '';
+
+$public_key = trim((string) $this->get_option('public_key'));
+
+if ($checkout_url === '') {
+    wc_add_notice(
+        __('Payment could not be started: no checkout URL returned.', 'wayaquick'),
+        'error'
+    );
+
+    $order->add_order_note(
+        'WayaQuick initiate returned no checkOutUrl.'
+    );
+
+    return array('result' => 'failure');
+}
+
+if ($public_key === '') {
+    wc_add_notice(
+        __('WayaQuick public key is not configured.', 'wayaquick'),
+        'error'
+    );
+
+    return array('result' => 'failure');
+}
+
+$checkout_url = add_query_arg(
+    'PUBLIC_KEY',
+    $public_key,
+    $checkout_url
+);
         $gateway_ref = isset($data['transactionId']) ? $data['transactionId'] : '';
 
         if ($checkout_url === '') {
