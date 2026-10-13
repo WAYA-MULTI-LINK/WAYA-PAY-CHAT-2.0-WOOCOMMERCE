@@ -1,13 +1,18 @@
 <?php
 /**
- * Plugin Name: WayaQuick WooCommerce Gateway
+ * Plugin Name: WayaQuick for WooCommerce
  * Description: Accept payments on WooCommerce using WayaQuick (Merchant API v2).
+ * Plugin URI: https://www.wayaquick.com/web-integration
  * Version: 2.0.0
  * Author: WayaQuick
+ * Author URI: https://www.wayaquick.com
  * Requires at least: 5.8
  * Requires PHP: 7.4
+ * License: GPLv2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Requires Plugins: woocommerce
  * WC requires at least: 6.0
- * Text Domain: wayaquick
+ * Text Domain: wayaquick-for-woocommerce
  */
 
 // Block direct access. WordPress defines ABSPATH; a direct hit will not.
@@ -54,22 +59,30 @@ function wayaquick_wc_register_gateway($gateways)
 function wayaquick_wc_missing_wc_notice()
 {
     echo '<div class="notice notice-error"><p>';
-    echo esc_html__('WayaQuick WooCommerce Gateway requires WooCommerce to be installed and active.', 'wayaquick');
+    echo esc_html__('WayaQuick for WooCommerce requires WooCommerce to be installed and active.', 'wayaquick-for-woocommerce');
     echo '</p></div>';
 }
 
 /**
- * Declare compatibility with WooCommerce High-Performance Order Storage (HPOS).
+ * Declare WooCommerce feature compatibility.
  */
-add_action('before_woocommerce_init', 'wayaquick_wc_declare_hpos');
+add_action('before_woocommerce_init', 'wayaquick_wc_declare_compatibility');
 
-function wayaquick_wc_declare_hpos()
+function wayaquick_wc_declare_compatibility()
 {
-    if (class_exists('\Automattic\WooCommerce\Utilities\FeaturesUtil')) {
+    if (class_exists('\\Automattic\\WooCommerce\\Utilities\\FeaturesUtil')) {
+        // The plugin uses wc_get_order()/wc_get_orders() and WooCommerce order metadata APIs.
         \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility(
             'custom_order_tables',
             WAYAQUICK_WC_FILE,
             true
+        );
+
+        // Native Checkout Block support is not implemented yet.
+        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility(
+            'cart_checkout_blocks',
+            WAYAQUICK_WC_FILE,
+            false
         );
     }
 }

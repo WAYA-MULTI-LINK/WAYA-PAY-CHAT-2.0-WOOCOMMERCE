@@ -24,7 +24,7 @@ class WayaQuick_Exception extends Exception
     public function __construct($message, $status_code = 0, $api_code = null)
     {
         parent::__construct($message);
-        $this->status_code = $status_code;
+        $this->status_code = absint($status_code);
         $this->api_code = $api_code;
     }
 
@@ -47,9 +47,9 @@ class WayaQuick_Client
 
     public function __construct($merchant_id, $secret_key, $base_url)
     {
-        $this->merchant_id = $merchant_id;
-        $this->secret_key = $secret_key;
-        $this->base_url = rtrim($base_url, '/');
+        $this->merchant_id = sanitize_text_field((string) $merchant_id);
+        $this->secret_key = trim((string) $secret_key);
+        $this->base_url = untrailingslashit(esc_url_raw($base_url));
     }
 
     /**
@@ -78,7 +78,7 @@ class WayaQuick_Client
     {
         $ts = (int) round(microtime(true) * 1000);
         $rand = strtoupper(bin2hex(random_bytes(4)));
-        return $prefix . '-' . $ts . '-' . $rand;
+        return sanitize_key($prefix) . '-' . $ts . '-' . $rand;
     }
 
     /**
@@ -104,26 +104,47 @@ class WayaQuick_Client
         $response = wp_remote_request($this->base_url . $path, $args);
 
         if (is_wp_error($response)) {
-            throw new WayaQuick_Exception($response->get_error_message());
+            throw new WayaQuick_Exception(
+                esc_html($response->get_error_message())
+            );
         }
 
-        $status = (int) wp_remote_retrieve_response_code($response);
+        $status = absint(wp_remote_retrieve_response_code($response));
         $raw = wp_remote_retrieve_body($response);
         $json = json_decode($raw, true);
 
         if (!is_array($json)) {
-            throw new WayaQuick_Exception('Unexpected response from WayaQuick (HTTP ' . $status . ').', $status);
+            throw new WayaQuick_Exception(
+                sprintf(
+                    /* translators: %d: HTTP status code returned by WayaQuick. */
+                    esc_html__('Unexpected response from WayaQuick (HTTP %d).', 'wayaquick-for-woocommerce'),
+                     esc_html((string) $status)
+                ),
+                 esc_html((string) $status)
+            );
         }
 
         // Envelope: { success, code, message, data, timestamp }. "00" is the success code.
         $ok = !empty($json['success']) && (!isset($json['code']) || $json['code'] === '00');
 
         if (!$ok) {
-            $message = isset($json['message']) ? $json['message'] : 'WayaQuick request failed.';
-            $api_code = isset($json['code']) ? $json['code'] : null;
-            throw new WayaQuick_Exception($message, $status, $api_code);
+            $message = isset($json['message'])
+                ? sanitize_text_field((string) $json['message'])
+                : __('WayaQuick request failed.', 'wayaquick-for-woocommerce');
+
+            $api_code = isset($json['code'])
+                ? sanitize_text_field((string) $json['code'])
+                : null;
+
+            throw new WayaQuick_Exception(
+                esc_html($message),
+                esc_html((string) $status),
+                null !== $api_code ? esc_html($api_code) : null
+            );
         }
 
-        return isset($json['data']) ? $json['data'] : array();
+        return isset($json['data']) && is_array($json['data']) ? $json['data'] : array();
     }
 }
+
+
