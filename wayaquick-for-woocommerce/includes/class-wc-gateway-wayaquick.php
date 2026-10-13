@@ -20,8 +20,8 @@ class WC_Gateway_WayaQuick extends WC_Payment_Gateway
     public function __construct()
     {
         $this->id = 'wayaquick';
-        $this->method_title = __('WayaQuick', 'wayaquick');
-        $this->method_description = __('Accept card, transfer, USSD and wallet payments through WayaQuick.', 'wayaquick');
+        $this->method_title = __('WayaQuick', 'wayaquick-for-woocommerce');
+        $this->method_description = __('Accept card, transfer, USSD and wallet payments through WayaQuick.', 'wayaquick-for-woocommerce');
         $this->has_fields = false;
         $this->supports = array('products');
 
@@ -54,6 +54,7 @@ class WC_Gateway_WayaQuick extends WC_Payment_Gateway
     public function get_icon()
     {
         if (empty($this->icon)) {
+            // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce core hook.
             return apply_filters('woocommerce_gateway_icon', '', $this->id);
         }
 
@@ -61,6 +62,7 @@ class WC_Gateway_WayaQuick extends WC_Payment_Gateway
             . ' alt="' . esc_attr($this->get_title()) . '"'
             . ' style="max-height:24px;width:auto;vertical-align:middle;margin-left:6px;" />';
 
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce core hook.
         return apply_filters('woocommerce_gateway_icon', $html, $this->id);
     }
 
@@ -73,71 +75,71 @@ class WC_Gateway_WayaQuick extends WC_Payment_Gateway
 
         $this->form_fields = array(
             'enabled' => array(
-                'title' => __('Enable/Disable', 'wayaquick'),
+                'title' => __('Enable/Disable', 'wayaquick-for-woocommerce'),
                 'type' => 'checkbox',
-                'label' => __('Enable WayaQuick', 'wayaquick'),
+                'label' => __('Enable WayaQuick', 'wayaquick-for-woocommerce'),
                 'default' => 'no',
             ),
             'title' => array(
-                'title' => __('Title', 'wayaquick'),
+                'title' => __('Title', 'wayaquick-for-woocommerce'),
                 'type' => 'text',
-                'default' => __('WayaQuick', 'wayaquick'),
-                'description' => __('What customers see as the payment method name at checkout.', 'wayaquick'),
+                'default' => __('WayaQuick', 'wayaquick-for-woocommerce'),
+                'description' => __('What customers see as the payment method name at checkout.', 'wayaquick-for-woocommerce'),
                 'desc_tip' => true,
             ),
             'description' => array(
-                'title' => __('Description', 'wayaquick'),
+                'title' => __('Description', 'wayaquick-for-woocommerce'),
                 'type' => 'textarea',
-                'default' => __('Pay securely with card, transfer, USSD or your WayaQuick wallet.', 'wayaquick'),
+                'default' => __('Pay securely with card, transfer, USSD or your WayaQuick wallet.', 'wayaquick-for-woocommerce'),
             ),
             'environment' => array(
-                'title' => __('Environment', 'wayaquick'),
+                'title' => __('Environment', 'wayaquick-for-woocommerce'),
                 'type' => 'select',
                 'default' => 'test',
                 'options' => array(
-                    'test' => __('Test / Staging', 'wayaquick'),
-                    'production' => __('Production', 'wayaquick'),
+                    'test' => __('Test / Staging', 'wayaquick-for-woocommerce'),
+                    'production' => __('Production', 'wayaquick-for-woocommerce'),
                 ),
-                'description' => __('Use Test while integrating, then switch to Production.', 'wayaquick'),
+                'description' => __('Use Test while integrating, then switch to Production.', 'wayaquick-for-woocommerce'),
                 'desc_tip' => true,
             ),
             'merchant_id' => array(
-                'title' => __('Merchant ID', 'wayaquick'),
+                'title' => __('Merchant ID', 'wayaquick-for-woocommerce'),
                 'type' => 'text',
-                'description' => __('Your MER_... Merchant ID from the dashboard.', 'wayaquick'),
+                'description' => __('Your MER_... Merchant ID from the dashboard.', 'wayaquick-for-woocommerce'),
                 'desc_tip' => true,
             ),
             'public_key' => array(
-                'title' => __('Public Key', 'wayaquick'),
+                'title' => __('Public Key', 'wayaquick-for-woocommerce'),
                 'type' => 'text',
-                'description' => __('Your WayaQuick merchant public key.', 'wayaquick'),
+                'description' => __('Your WayaQuick merchant public key.', 'wayaquick-for-woocommerce'),
                 'desc_tip' => true,
             ),
             'secret_key' => array(
-                'title' => __('Secret Key', 'wayaquick'),
+                'title' => __('Secret Key', 'wayaquick-for-woocommerce'),
                 'type' => 'password',
-                'description' => __('WAYASECK_TEST_... on test, WAYASECK_... on live.', 'wayaquick'),
+                'description' => __('WAYASECK_TEST_... on test, WAYASECK_... on live.', 'wayaquick-for-woocommerce'),
                 'desc_tip' => true,
             ),
             'webhook_secret' => array(
-                'title' => __('Webhook Secret', 'wayaquick'),
+                'title' => __('Webhook Secret', 'wayaquick-for-woocommerce'),
                 'type' => 'password',
-                'description' => __('The merchant secret used to sign webhooks. Required to accept payment confirmations.', 'wayaquick'),
+                'description' => __('The merchant secret used to sign webhooks. Required to accept payment confirmations.', 'wayaquick-for-woocommerce'),
                 'desc_tip' => true,
             ),
             'webhook_url' => array(
-                'title' => __('Webhook URL', 'wayaquick'),
+                'title' => __('Webhook URL', 'wayaquick-for-woocommerce'),
                 'type' => 'title',
                 'description' => sprintf(
                     /* translators: %s: the webhook URL to paste into the dashboard */
-                    __('Add this URL in your WayaQuick dashboard under Settings, API Keys and Webhooks: %s', 'wayaquick'),
+                    __('Add this URL in your WayaQuick dashboard under Settings, API Keys and Webhooks: %s', 'wayaquick-for-woocommerce'),
                     '<br/><code>' . esc_url($webhook_url) . '</code>'
                 ),
             ),
             'base_url' => array(
-                'title' => __('API Base URL (advanced)', 'wayaquick'),
+                'title' => __('API Base URL (advanced)', 'wayaquick-for-woocommerce'),
                 'type' => 'text',
-                'description' => __('Leave blank to use the default for the selected environment. Override only if support gives you a different host.', 'wayaquick'),
+                'description' => __('Leave blank to use the default for the selected environment. Override only if support gives you a different host.', 'wayaquick-for-woocommerce'),
                 'default' => '',
                 'desc_tip' => true,
             ),
@@ -158,7 +160,8 @@ class WC_Gateway_WayaQuick extends WC_Payment_Gateway
             return 'https://services.wayapay.ng/merchant-middleware';
         }
 
-        return 'https://services.staging.wayapay.ng/merchant-middleware';
+        // return 'https://services.staging.wayapay.ng/merchant-middleware';
+        return 'https://services.wayapay.ng/merchant-middleware';
     }
 
     private function get_client()
@@ -178,7 +181,7 @@ class WC_Gateway_WayaQuick extends WC_Payment_Gateway
         $order = wc_get_order($order_id);
 
         if (!$order) {
-            wc_add_notice(__('Unable to process payment: order not found.', 'wayaquick'), 'error');
+            wc_add_notice(__('Unable to process payment: order not found.', 'wayaquick-for-woocommerce'), 'error');
             return array('result' => 'failure');
         }
 
@@ -201,7 +204,11 @@ class WC_Gateway_WayaQuick extends WC_Payment_Gateway
             'amount' => number_format((float) $order->get_total(), 2, '.', ''),
             'currency' => $order->get_currency(),
             'transactionId' => $reference,
-            'description' => sprintf(__('Order #%s', 'wayaquick'), $order->get_order_number()),
+            'description' => sprintf(
+                /* translators: %s: WooCommerce order number. */
+                __('Order #%s', 'wayaquick-for-woocommerce'),
+                $order->get_order_number()
+            ),
             'redirectLink' => $return_url,
             'meta' => array(
                 'orderId' => (string) $order->get_id(),
@@ -211,58 +218,44 @@ class WC_Gateway_WayaQuick extends WC_Payment_Gateway
         try {
             $data = $this->get_client()->initiate_collection($payload);
         } catch (WayaQuick_Exception $e) {
-            wc_add_notice(__('Payment could not be started. Please try again.', 'wayaquick'), 'error');
-            $order->add_order_note('WayaQuick initiate failed: ' . $e->getMessage());
+            wc_add_notice(__('Payment could not be started. Please try again.', 'wayaquick-for-woocommerce'), 'error');
+            $order->add_order_note('WayaQuick initiate failed: ' . sanitize_text_field($e->getMessage()));
             return array('result' => 'failure');
         }
 
-        $checkout_url = isset($data['checkOutUrl'])
-    ? $data['checkOutUrl']
-    : '';
-
-$public_key = trim((string) $this->get_option('public_key'));
-
-if ($checkout_url === '') {
-    wc_add_notice(
-        __('Payment could not be started: no checkout URL returned.', 'wayaquick'),
-        'error'
-    );
-
-    $order->add_order_note(
-        'WayaQuick initiate returned no checkOutUrl.'
-    );
-
-    return array('result' => 'failure');
-}
-
-if ($public_key === '') {
-    wc_add_notice(
-        __('WayaQuick public key is not configured.', 'wayaquick'),
-        'error'
-    );
-
-    return array('result' => 'failure');
-}
-
-$checkout_url = add_query_arg(
-    'PUBLIC_KEY',
-    $public_key,
-    $checkout_url
-);
-        $gateway_ref = isset($data['transactionId']) ? $data['transactionId'] : '';
+        $checkout_url = isset($data['checkOutUrl']) ? esc_url_raw($data['checkOutUrl']) : '';
+        $public_key = trim((string) $this->get_option('public_key'));
+        $gateway_ref = isset($data['transactionId']) ? sanitize_text_field($data['transactionId']) : '';
 
         if ($checkout_url === '') {
-            wc_add_notice(__('Payment could not be started: no checkout URL returned.', 'wayaquick'), 'error');
+            wc_add_notice(
+                __('Payment could not be started: no checkout URL returned.', 'wayaquick-for-woocommerce'),
+                'error'
+            );
             $order->add_order_note('WayaQuick initiate returned no checkOutUrl.');
             return array('result' => 'failure');
         }
+
+        if ($public_key === '') {
+            wc_add_notice(
+                __('WayaQuick public key is not configured.', 'wayaquick-for-woocommerce'),
+                'error'
+            );
+            return array('result' => 'failure');
+        }
+
+        $checkout_url = add_query_arg(
+            'PUBLIC_KEY',
+            $public_key,
+            $checkout_url
+        );
 
         // Store both references so webhook and return handlers can find this order.
         $order->update_meta_data('_wayaquick_reference', $reference);
         if ($gateway_ref !== '') {
             $order->update_meta_data('_wayaquick_gateway_ref', $gateway_ref);
         }
-        $order->update_status('pending', __('Awaiting WayaQuick payment.', 'wayaquick'));
+        $order->update_status('pending', __('Awaiting WayaQuick payment.', 'wayaquick-for-woocommerce'));
         $order->save();
 
         return array(
@@ -276,10 +269,20 @@ $checkout_url = add_query_arg(
      */
     public function handle_return()
     {
-        $order_id = isset($_GET['order_id']) ? absint($_GET['order_id']) : 0;
+        // External payment return: authenticity is confirmed server-side via WayaQuick status lookup.
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- External callback cannot carry a WordPress nonce.
+        $order_id = isset($_GET['order_id']) ? absint(wp_unslash($_GET['order_id'])) : 0;
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- External callback cannot carry a WordPress nonce.
+        $return_ref = isset($_GET['ref']) ? sanitize_text_field(wp_unslash($_GET['ref'])) : '';
         $order = $order_id ? wc_get_order($order_id) : false;
 
         if (!$order) {
+            wp_safe_redirect(wc_get_cart_url());
+            exit;
+        }
+
+        $stored_ref = (string) $order->get_meta('_wayaquick_reference');
+        if ($return_ref === '' || $stored_ref === '' || !hash_equals($stored_ref, $return_ref)) {
             wp_safe_redirect(wc_get_cart_url());
             exit;
         }
@@ -296,9 +299,9 @@ $checkout_url = add_query_arg(
         if (!empty($gateway_ref)) {
             try {
                 $data = $this->get_client()->get_collection_status($gateway_ref);
-                $status = isset($data['status']) ? strtoupper($data['status']) : '';
+                $status = isset($data['status']) ? strtoupper(sanitize_text_field((string) $data['status'])) : '';
             } catch (WayaQuick_Exception $e) {
-                $order->add_order_note('WayaQuick status check failed: ' . $e->getMessage());
+                $order->add_order_note('WayaQuick status check failed: ' . sanitize_text_field($e->getMessage()));
             }
         }
 
@@ -310,14 +313,14 @@ $checkout_url = add_query_arg(
 
         $failed = array('FAILED', 'DECLINED', 'REJECTED', 'ABANDONED', 'EXPIRED', 'CANCELLED');
         if (in_array($status, $failed, true)) {
-            $order->update_status('failed', __('WayaQuick reported the payment as not completed.', 'wayaquick'));
-            wc_add_notice(__('Your payment was not completed. Please try again.', 'wayaquick'), 'error');
+            $order->update_status('failed', __('WayaQuick reported the payment as not completed.', 'wayaquick-for-woocommerce'));
+            wc_add_notice(__('Your payment was not completed. Please try again.', 'wayaquick-for-woocommerce'), 'error');
             wp_safe_redirect(wc_get_checkout_url());
             exit;
         }
 
         // Still in flight. Send them to the order-received page; the webhook finalises.
-        wc_add_notice(__('Your payment is being confirmed. Your order will update shortly.', 'wayaquick'), 'notice');
+        wc_add_notice(__('Your payment is being confirmed. Your order will update shortly.', 'wayaquick-for-woocommerce'), 'notice');
         wp_safe_redirect($this->get_return_url($order));
         exit;
     }
@@ -328,8 +331,15 @@ $checkout_url = add_query_arg(
     public function handle_webhook()
     {
         $raw_body = file_get_contents('php://input');
-        $timestamp = isset($_SERVER['HTTP_X_WAYA_TIMESTAMP']) ? $_SERVER['HTTP_X_WAYA_TIMESTAMP'] : '';
-        $signature = isset($_SERVER['HTTP_X_WAYA_SIGNATURE']) ? $_SERVER['HTTP_X_WAYA_SIGNATURE'] : '';
+        $raw_body = is_string($raw_body) ? $raw_body : '';
+
+        $timestamp = isset($_SERVER['HTTP_X_WAYA_TIMESTAMP'])
+            ? sanitize_text_field(wp_unslash($_SERVER['HTTP_X_WAYA_TIMESTAMP']))
+            : '';
+
+        $signature = isset($_SERVER['HTTP_X_WAYA_SIGNATURE'])
+            ? sanitize_text_field(wp_unslash($_SERVER['HTTP_X_WAYA_SIGNATURE']))
+            : '';
         $secret = $this->get_option('webhook_secret');
 
         try {
@@ -340,8 +350,8 @@ $checkout_url = add_query_arg(
             exit;
         }
 
-        $gateway_ref = isset($event['OrderId']) ? $event['OrderId'] : '';
-        $status = isset($event['Status']) ? strtoupper($event['Status']) : '';
+        $gateway_ref = isset($event['OrderId']) ? sanitize_text_field((string) $event['OrderId']) : '';
+        $status = isset($event['Status']) ? strtoupper(sanitize_text_field((string) $event['Status'])) : '';
 
         $order = $this->find_order_by_gateway_ref($gateway_ref);
 
@@ -350,7 +360,7 @@ $checkout_url = add_query_arg(
                 $this->mark_order_paid($order, $gateway_ref);
             } elseif ($status === 'FAILED') {
                 if (!$order->is_paid()) {
-                    $order->update_status('failed', __('WayaQuick webhook: payment failed.', 'wayaquick'));
+                    $order->update_status('failed', __('WayaQuick webhook: payment failed.', 'wayaquick-for-woocommerce'));
                 }
             }
             // PARTIAL: leave the order alone and reconcile manually.
@@ -373,7 +383,13 @@ $checkout_url = add_query_arg(
         }
 
         $order->payment_complete($transaction_id);
-        $order->add_order_note(sprintf(__('WayaQuick payment confirmed (ref %s).', 'wayaquick'), $transaction_id));
+        $order->add_order_note(
+            sprintf(
+                /* translators: %s: WayaQuick transaction reference. */
+                __('WayaQuick payment confirmed (ref %s).', 'wayaquick-for-woocommerce'),
+                sanitize_text_field($transaction_id)
+            )
+        );
     }
 
     /**
@@ -389,6 +405,7 @@ $checkout_url = add_query_arg(
         // reference we sent, so match on both.
         $orders = wc_get_orders(array(
             'limit' => 1,
+            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- Needed to reconcile WayaQuick references stored in WooCommerce order metadata.
             'meta_query' => array(
                 'relation' => 'OR',
                 array(

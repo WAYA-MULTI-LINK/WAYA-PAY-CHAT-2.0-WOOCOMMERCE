@@ -33,11 +33,15 @@ class WayaQuick_Webhook
             return false;
         }
 
+        if (!is_numeric($timestamp)) {
+            return false;
+        }
+
         // Timestamp arrives in milliseconds.
         $now_ms = (int) round(microtime(true) * 1000);
         $ts_ms = (int) $timestamp;
 
-        if (abs($now_ms - $ts_ms) > ($tolerance * 1000)) {
+        if (abs($now_ms - $ts_ms) > (absint($tolerance) * 1000)) {
             return false;
         }
 
@@ -54,15 +58,20 @@ class WayaQuick_Webhook
     public static function construct_event($raw_body, $timestamp, $signature, $secret, $tolerance = self::DEFAULT_TOLERANCE)
     {
         if (!self::verify_signature($raw_body, $timestamp, $signature, $secret, $tolerance)) {
-            throw new WayaQuick_Exception('Webhook signature verification failed.');
+            throw new WayaQuick_Exception(
+                esc_html__('Webhook signature verification failed.', 'wayaquick-for-woocommerce')
+            );
         }
 
         $event = json_decode($raw_body, true);
 
         if (!is_array($event)) {
-            throw new WayaQuick_Exception('Webhook body is not valid JSON.');
+            throw new WayaQuick_Exception(
+                esc_html__('Webhook body is not valid JSON.', 'wayaquick-for-woocommerce')
+            );
         }
 
         return $event;
     }
 }
+
